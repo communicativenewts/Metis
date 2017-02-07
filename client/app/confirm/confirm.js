@@ -1,5 +1,3 @@
-console.log('Confirm.js Loaded.');
-
 angular.module('app.confirm', [])
   .controller('confirmCtrl', function($scope, $location, Tasks, Algorithm) {
 
@@ -9,6 +7,7 @@ angular.module('app.confirm', [])
     // Previously sorted events array
     $scope.sortedEvents = Tasks.getTasks();
 
+    // Remove time from UTC date
     $scope.formatDate = function() {
       var date = $scope.userData.longDate;
       var dateIndex = date.indexOf(':');
@@ -16,61 +15,33 @@ angular.module('app.confirm', [])
       return formatted;
     };
 
-    // Grab task list saved in Tasks factory
+    // Create events array to be used for confirmation page view
     $scope.displaySchedule = function() {
       $scope.events = Algorithm.displaySchedule($scope.sortedEvents);
       $scope.date = $scope.formatDate();
-      console.log('Getting task list:', $scope.events);
     };
 
+    // Create displaySchedule events array
     $scope.displaySchedule();
 
-    // Add events in list to calendar
+    // Add events in events array to calendar
     $scope.addToCalendar = function() {
-
       $scope.events.forEach(function(event) {
         event.date = $scope.formatDate();
       });
-
+      // Send events array to internal storage array in services.js
       Tasks.sendTaskList($scope.events);
-      console.log('Sent to Factory:', $scope.events);
-
-      // *** UNCOMMENT WHEN ALGORITHM CONNECTED ***
-
-      console.log('Sorted Schedule:', $scope.sortedEvents);
-      console.log('User Data:', $scope.userData);
-
+      // Create events array formatted for Google Calendar API
       var apiEvents = Algorithm.makeAPI($scope.sortedEvents, $scope.userData);
-
-      // Send each event to the API
+      // Send each event object in array to the Google Calendar API
       apiEvents.forEach(function(event) {
-
-        console.log('Sending event to Google:', event);
-
         Tasks.sendToGoogle(event);
-
       });
-
-      // // *** TEST EVENT / WILL POST TO CALENDAR ***
-      // var testEvent = {
-      //   "summary": "App is Working!",
-      //   "start": {
-      //     "dateTime": "2017-02-06T14:30:00-07:00"
-      //   },
-      //   "end": {
-      //     "dateTime": "2017-02-06T16:30:00-07:00"
-      //   }
-      // };
-
-      // console.log('Actually sending this:', testEvent);
-
-      // Tasks.sendToGoogle(testEvent);
-
       $scope.redirect('/calendar');
     };
 
+    // Redirect to different page view
     $scope.redirect = function(page) {
       $location.path(page);
     };
-
   });

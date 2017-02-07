@@ -104,17 +104,13 @@
         window.profile = googleUser.getBasicProfile();
         authorizeButton.style.display = 'none';
         signoutButton.style.display = 'block';
-
         // OAuth2 authentication object
         // Added to window for easy access throughout app
         window.authResponse = googleUser.getAuthResponse();
-
         // Access Token for OAuth2
         var access_token = authResponse.access_token;
-
         // The ID token that can be used on your backend:
         var id_token = authResponse.id_token;
-
         window.location.replace("/#!/calendar");
       };
       function signOut() {

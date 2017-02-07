@@ -1,5 +1,3 @@
-console.log('Algorithm.js Loaded correctly.');
-
 angular.module('app.algorithm', [])
 
 .factory('Algorithm', function () {
