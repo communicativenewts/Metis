@@ -1,15 +1,11 @@
-console.log('Services.js Loaded.');
-
 angular.module('app.services', [])
 
-.factory('Tasks', function ($http) {
+.factory('Tasks', function ($http, $location) {
 
   // User data to be populated on login
   var userData = {};
-
   // Array of all tasks to populate calendar view
   var allTasks = [];
-
   // Events array to be set and retrieved with helpers below
   var tasks = [];
 
@@ -59,6 +55,9 @@ angular.module('app.services', [])
     })
     .then(function(res) {
       return res;
+    })
+    .then(function() {
+      $location.path('/calendar');
     });
   };
 
@@ -71,5 +70,4 @@ angular.module('app.services', [])
     sendTaskList: sendTaskList,
     sendToGoogle: sendToGoogle
   };
-
 });

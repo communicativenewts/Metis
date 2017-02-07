@@ -1,5 +1,3 @@
-console.log('Schedule.js Loaded.');
-
 angular.module('app.schedule', ['ngSanitize'])
   .controller('scheduleCtrl', function($scope, $location, $sce, Tasks, Algorithm) {
 
@@ -8,7 +6,6 @@ angular.module('app.schedule', ['ngSanitize'])
 
     // Options for 'Start Time/End Time' drop down selectors
     $scope.timeOptions = [
-
       {opt: '12:00am', val: 0},
       {opt: '12:30am', val: 0.5},
       {opt: '1:00am', val: 1},
@@ -57,12 +54,10 @@ angular.module('app.schedule', ['ngSanitize'])
       {opt: '10:30pm', val: 22.5},
       {opt: '11:00pm', val: 23},
       {opt: '11:30pm', val: 23.5}
-
     ];
 
     // Options for 'Duration' drop down selector
     $scope.durationOptions = [
-
       {opt: '0.5 hrs', val: 0.5},
       {opt: '1.0 hrs', val: 1},
       {opt: '1.5 hrs', val: 1.5},
@@ -87,7 +82,6 @@ angular.module('app.schedule', ['ngSanitize'])
       {opt: '11.0 hrs', val: 11},
       {opt: '11.5 hrs', val: 11.5},
       {opt: '12.0 hrs', val: 12}
-
     ];
 
     // Date selector
@@ -106,17 +100,13 @@ angular.module('app.schedule', ['ngSanitize'])
 
     // Adds current event to events array
     $scope.addTask = function() {
-      console.log('Adding task...');
-
       $scope.invalidTimes = false;
+      // Check to see if event times are valid
       var valid = Algorithm.checkEvent($scope.event);
-
       if (valid) {
         $scope.events.push($scope.event);
-        console.log('Success:', $scope.event);
         $scope.event = {};
       } else {
-        console.log('invalid event times');
         $scope.invalidTimes = true;
       }
     };
@@ -137,9 +127,8 @@ angular.module('app.schedule', ['ngSanitize'])
     $scope.makeSchedule = function() {
       $scope.addIdProp($scope.events);
       $scope.addUserDate();
-
+      // Check to see if schedule can be created with time frame
       if (Algorithm.makeSchedule($scope.events) === false) {
-        // No Schedule can be created
         $scope.invalidSchedule = true;
       } else {
         Tasks.setTasks($scope.events);
@@ -164,10 +153,8 @@ angular.module('app.schedule', ['ngSanitize'])
       $scope.userData.date = date;
       $scope.userData.longDate = longDate;
       Tasks.setUserData($scope.userData);
-      console.log('User Data Updated:', $scope.userData);
     };
 
     // source for iframe used in calendar.html
     $scope.calSource = "https://calendar.google.com/calendar/embed?showPrint=0&mode=AGENDA&src=" + $scope.userData.user + "%40gmail.com&ctz=" + $scope.userData.tz;
-
   });
