@@ -54,6 +54,12 @@ The roles of our files/folders are included below:
 /client/owl-carousel
   -this folder is one of several dependancy folders needed to propertly run our Responsee 4 CSS template/framework, www.myresponsee.com.
 
+/client/js
+  -this folder is one of several dependancy folders needed to propertly run our Responsee 4 CSS template/framework, www.myresponsee.com.
+
+/client/lib
+  -this folder contains our AngularJS library files that were necessary for the proper function of the Karma test suite.
+
 /server/server.js
   -this file contains our node/express server.
 
@@ -65,6 +71,10 @@ The roles of our files/folders are included below:
 
 /server/users
   -this folder contains our database controller and model files for users, the skeleton is there but these files are currently not being used, please see the comments in these files for further details.
+
+/specs/tests
+  -this folder contains our test file, please see the Running Tests section below in this ReadMe for further details.
+
 
 ## Requirements
 
@@ -109,3 +119,8 @@ View the project issues [here](https://github.com/communicativenewts/communicati
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+
+## Running Tests
+
+Intiate the test sequence by running 'gulp karma' from the command line.  More testing files can be added to specs/tests and karma.config.js
