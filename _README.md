@@ -1,16 +1,16 @@
 # Project Name
 
-> Pithy project description
+> Metis, the new way to plan your day!
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Elizabeth Akerman
+  - __Scrum Master__: Alex Autem
+  - __Development Team Member__: Bruce Graham
 
 ## Table of Contents
 
-1. [Usage](#Usage)
+1. [Files](#Files)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
@@ -18,17 +18,65 @@
 1. [Team](#team)
 1. [Contributing](#contributing)
 
-## Usage
+## Files
+The roles of our files/folders are included below:
 
-> Some usage instructions
+/client/index.html
+  -this file contains the usual CDN's, link, meta and script tags however the important thing to know is that the script tag starting on approx line 90 is what contains all the nuts and bolts for our Google Calendar API login.
+
+/client/app/app.js
+  -this file contains the AngularJS $routeProviders.
+
+/client/app/calendar
+  -this folder contains the AngularJS calendar view template and controller.
+
+/client/app/confirm
+  -this folder contains the AngularJS confirm view template and controller.
+
+/client/app/login
+  -this folder contains the AngularJS login view template and controller.
+
+/client/app/schedule
+  -this folder contains the AngularJS schedule view template and controller.
+
+/client/app/services
+  -this folder has two files which contain all the functions for converting a list of tasks into a usable schedule.  It also converts the schedule into the formats required for displaying the new tasks on the AngularJS confirm view and for sending the new tasks to the Google API.
+
+/client/css
+  -this folder is one of several dependancy folders needed to propertly run our Responsee 4 CSS template/framework, www.myresponsee.com.
+
+/client/font
+  -this folder is one of several dependancy folders needed to propertly run our Responsee 4 CSS template/framework, www.myresponsee.com.
+
+/client/img/metis.png
+  -this file is our main logo which shows up on our index.html page.
+
+/client/owl-carousel
+  -this folder is one of several dependancy folders needed to propertly run our Responsee 4 CSS template/framework, www.myresponsee.com.
+
+/server/server.js
+  -this file contains our node/express server.
+
+/server/config
+  -this folder contains our server routes file, the skeleton is there but this file is currently not being used, please see the comments in this file for further details.
+
+/server/tasks
+  -this folder contains our database controller and model files for tasks, the skeleton is there but these files are currently not being used, please see the comments in these files for further details.
+
+/server/users
+  -this folder contains our database controller and model files for users, the skeleton is there but these files are currently not being used, please see the comments in these files for further details.
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- AngularJS 1.6.x
+- Angular-Route 1.6.x
+- Angular-Sanitize 1.6.x
+- Node 6.9.x
+- Express 4.13.x
+- Body-Parser 1.15.x
+- MongoDB 3.2.x
+- Mongoose 4.8.x
+- Responsee 4
 
 ## Development
 
@@ -36,15 +84,26 @@
 
 From within the root directory:
 
-```sh
-sudo npm install -g bower
 npm install
-bower install
-```
+*all other dependencies are connected via CDN
 
-### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+## Important Accounts
+
+-GMAIL API Account
+username: communicativenewts@gmail.com
+pw: hrr21newts
+
+-MLAB DATABASE
+mLab username: communicativenewts
+mLab pw: hrr21newts
+database username: greenfield
+database pw: greenfield
+
+
+### Project Issues Link
+
+View the project issues [here](https://github.com/communicativenewts/communicativenewts/issues)
 
 
 ## Contributing

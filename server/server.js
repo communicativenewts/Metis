@@ -7,7 +7,7 @@ var app = express();
 app.use(express.static('client'));
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://greenfield:greenfield@ds137749.mlab.com:37749/metis_database');
+mongoose.connect('mongodb://greenfield:<greenfield>@ds145039.mlab.com:45039/metis_database');
 
 var db = mongoose.connection;
 db.on('error', console.error);

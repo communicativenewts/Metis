@@ -1,4 +1,7 @@
+//currently unused, you will need to refactor all files in server/tasks, server/config and server/users in order to setup the database as partway through our project we pivoted to have all our data saved on the google calendar api.
+
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 var Task = require('./taskModel.js');
 var User = require('../users/userModel.js');
 
