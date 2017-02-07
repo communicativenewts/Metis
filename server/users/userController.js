@@ -1,10 +1,13 @@
+//currently unused, you will need to refactor all files in server/tasks, server/config and server/users in order to setup the database as partway through our project we pivoted to have all our data saved on the google calendar api.
+
 var mongoose = require('mongoose');
-var GoogleAuth = require('google-auth-library');
+var bodyParser = require('body-parser');
 var User = require('./userModel.js');
 
 
 module.exports = {
 
+  //currently unused
   signup: function(req, res) {
     mongoose.model('users', function(err, user) {
 
@@ -22,16 +25,5 @@ module.exports = {
 
       newUser.save();
     });
-  },
-
-  //currently unused - for expanding to back-end authentication
-  authorize: function() {
-    var auth = new GoogleAuth;
-    var client = new auth.OAuth2(CLIENT_ID, '', '');
-    client.verifyIdToken(token, CLIENT_ID, function(e, login) {
-      var payload = login.getPayload();
-      var userid = payload['sub'];
-    });
   }
-
 }
