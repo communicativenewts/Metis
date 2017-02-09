@@ -31,9 +31,8 @@
             <p class="nav-text"></p>
             <ul class="right chevron">
 
-              <!-- Google Sign-In Button -->
-              <li><div id="my-signin2"></div></li>
-              <!-- <li><div id="signout-button" display="none">Sign Out</div></li> -->
+              <!-- Google Sign-Out Button -->
+              <li><div><a href='#' class="submit-form button background-primary border-radius text-white" id="signout-button" style="display: none;" onclick="signOut();">Sign Out</a></div></li>
 
             </ul>
           </div>
@@ -54,7 +53,12 @@
       <section class="section background-white">
         <div class="full-width text-center">
           <div class="line">
+
             <div ng-view></div>
+
+            <!-- Google Sign-In Button -->
+            <div class="s-12" id="my-signin2" style="display: block;"></div>
+
           </div>
         </div>
       </section>
@@ -86,12 +90,17 @@
     <script src="./app/services/algorithm.js"></script>
 
     <script>
+      var signIn = document.getElementById('my-signin2');
+      var signOut = document.getElementById('signout-button');
+
       function onSuccess(googleUser) {
         window.profile = googleUser.getBasicProfile();
         console.log('Profile:', window.profile);
         window.authResponse = googleUser.getAuthResponse();
         console.log('Auth Response:', window.authResponse);
+        signIn.style.display = 'none';
         window.location.replace('/#!/calendar');
+        signOut.style.display = 'block';
       }
       function onFailure(error) {
         console.log(error);
@@ -107,21 +116,18 @@
           'onfailure': onFailure
         });
       }
-    </script>
-
-    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-
-      <!-- var authorizeButton = document.getElementById('my-signin2');
-      var signoutButton = document.getElementById('signout-button');
-        authorizeButton.style.display = 'none';
-        signoutButton.style.display = 'block';
-        window.location.replace("/#!/calendar");
-      };
       function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
+          singOut.style.display = 'none';
+          window.location.replace('/');
+          signIn.style.display = 'block';
           console.log('User signed out.');
-        }); -->
+        });
+      }
+    </script>
+
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 
   </body>
 </html>
