@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="141003443952-li7skbk81f020j44lvoj4h8d2ae4ihh1.apps.googleusercontent.com">
     <title>Metis</title>
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/icons.css">
@@ -14,9 +16,6 @@
     <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.6/jstz.js"></script>
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="141003443952-li7skbk81f020j44lvoj4h8d2ae4ihh1.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
   </head>
 
   <body class="size-1140" ng-app="app">
@@ -32,8 +31,9 @@
             <p class="nav-text"></p>
             <ul class="right chevron">
 
-              <li><div id="authorize-button" style="display: none;" class="g-signin2" data-onsuccess="onSignIn">Sign In</div></li>
-              <li><button href="/" id="signout-button" style="display: none;" class="g-signout2" onclick="signOut();">Sign Out</button></li>
+              <!-- Google Sign-In Button -->
+              <li><div id="my-signin2"></div></li>
+              <!-- <li><div id="signout-button" display="none">Sign Out</div></li> -->
 
             </ul>
           </div>
@@ -84,46 +84,44 @@
     <script src="./app/confirm/confirm.js"></script>
     <script src="./app/services/services.js"></script>
     <script src="./app/services/algorithm.js"></script>
-    <script src="https://apis.google.com/js/api.js"></script>
 
-    <!-- Code in the script below handles the majority of all our Google Calendar Api logins -->
-    <script type="text/javascript">
-      // Client ID and API key from the Developer Console
-      var CLIENT_ID = '141003443952-li7skbk81f020j44lvoj4h8d2ae4ihh1.apps.googleusercontent.com';
-      // Array of API discovery doc URLs for APIs used by the quickstart
-      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
-      // Authorization scopes required by the API; multiple scopes can be
-      // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar";
-
-      var authorizeButton = document.getElementById('authorize-button');
-      var signoutButton = document.getElementById('signout-button');
-
-      function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
+    <script>
+      function onSuccess(googleUser) {
         window.profile = googleUser.getBasicProfile();
+        console.log('Profile:', window.profile);
+        window.authResponse = googleUser.getAuthResponse();
+        console.log('Auth Response:', window.authResponse);
+        window.location.replace('/#!/calendar');
+      }
+      function onFailure(error) {
+        console.log(error);
+      }
+      function renderButton() {
+        gapi.signin2.render('my-signin2', {
+          'scope': 'profile email https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar',
+          'width': 240,
+          'height': 50,
+          'longtitle': true,
+          'theme': 'dark',
+          'onsuccess': onSuccess,
+          'onfailure': onFailure
+        });
+      }
+    </script>
+
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+      <!-- var authorizeButton = document.getElementById('my-signin2');
+      var signoutButton = document.getElementById('signout-button');
         authorizeButton.style.display = 'none';
         signoutButton.style.display = 'block';
-        // OAuth2 authentication object
-        // Added to window for easy access throughout app
-        window.authResponse = googleUser.getAuthResponse();
-        // Access Token for OAuth2
-        var access_token = authResponse.access_token;
-        // The ID token that can be used on your backend:
-        var id_token = authResponse.id_token;
         window.location.replace("/#!/calendar");
       };
       function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
           console.log('User signed out.');
-        });
-        signoutButton.style.display = 'none';
-        authorizeButton.style.display = 'block';
-        window.location.replace("/");
-      }
-      authorizeButton.style.display = 'block';
-    </script>
+        }); -->
 
   </body>
 </html>
