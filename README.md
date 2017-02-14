@@ -98,22 +98,9 @@ npm install
 *all other dependencies are connected via CDN
 
 
-## Important Accounts
-
--GMAIL API Account
-username: communicativenewts@gmail.com
-pw: hrr21newts
-
--MLAB DATABASE
-mLab username: communicativenewts
-mLab pw: hrr21newts
-database username: greenfield
-database pw: greenfield
-
-
 ### Project Issues Link
 
-View the project issues [here](https://github.com/communicativenewts/communicativenewts/issues)
+View the project issues [here](https://waffle.io/communicativetech/metis)
 
 
 ## Contributing
