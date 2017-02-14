@@ -6,7 +6,7 @@
 
   - __Product Owner__: Elizabeth Akerman
   - __Scrum Master__: Alex Autem
-  - __Development Team Member__: Bruce Graham
+  - __Lead Software Engineer__: Bruce Graham
 
 ## Table of Contents
 
