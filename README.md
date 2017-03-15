@@ -6,7 +6,7 @@
 
   - __Product Owner__: Elizabeth Akerman
   - __Scrum Master__: Alex Autem
-  - __Development Team Member__: Bruce Graham
+  - __Lead Software Engineer__: Bruce Graham
 
 ## Table of Contents
 
@@ -96,19 +96,6 @@ From within the root directory:
 
 npm install
 *all other dependencies are connected via CDN
-
-
-## Important Accounts
-
--GMAIL API Account
-username: communicativenewts@gmail.com
-pw: hrr21newts
-
--MLAB DATABASE
-mLab username: communicativenewts
-mLab pw: hrr21newts
-database username: greenfield
-database pw: greenfield
 
 
 ### Project Issues Link
