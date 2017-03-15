@@ -100,7 +100,7 @@ npm install
 
 ### Project Issues Link
 
-View the project issues [here](https://waffle.io/communicativetech/metis)
+View the project issues [here](https://github.com/communicativenewts/communicativenewts/issues)
 
 
 ## Contributing
