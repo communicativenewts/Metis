@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="141003443952-li7skbk81f020j44lvoj4h8d2ae4ihh1.apps.googleusercontent.com">
     <title>Metis</title>
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/icons.css">
@@ -14,9 +16,6 @@
     <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.6/jstz.js"></script>
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="141003443952-li7skbk81f020j44lvoj4h8d2ae4ihh1.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
   </head>
 
   <body class="size-1140" ng-app="app">
@@ -32,8 +31,8 @@
             <p class="nav-text"></p>
             <ul class="right chevron">
 
-              <li><div id="authorize-button" style="display: none;" class="g-signin2" data-onsuccess="onSignIn">Sign In</div></li>
-              <li><button href="/" id="signout-button" style="display: none;" class="g-signout2" onclick="signOut();">Sign Out</button></li>
+              <!-- Google Sign-Out Button -->
+              <li><div><a href='#' class="submit-form button background-primary border-radius text-white" id="signout-button" style="display: none;" onclick="logOut();">Sign Out</a></div></li>
 
             </ul>
           </div>
@@ -45,7 +44,7 @@
       <section class="background-primary text-center">
         <div class="line">
           <div class="s-12 m-10 l-8 center">
-            <h2 class="headline text-thin text-s-size-30">Metis</h2>
+            <h2 class="headline text-thin text-s-size-30"><br/ ></h2>
           </div>
         </div>
       </section>
@@ -54,7 +53,12 @@
       <section class="section background-white">
         <div class="full-width text-center">
           <div class="line">
+
             <div ng-view></div>
+
+            <!-- Google Sign-In Button -->
+            <div id="my-signin2" style="display: block; width: 250px; margin: auto;"></div>
+
           </div>
         </div>
       </section>
@@ -84,46 +88,43 @@
     <script src="./app/confirm/confirm.js"></script>
     <script src="./app/services/services.js"></script>
     <script src="./app/services/algorithm.js"></script>
-    <script src="https://apis.google.com/js/api.js"></script>
 
-    <!-- Code in the script below handles the majority of all our Google Calendar Api logins -->
-    <script type="text/javascript">
-      // Client ID and API key from the Developer Console
-      var CLIENT_ID = '141003443952-li7skbk81f020j44lvoj4h8d2ae4ihh1.apps.googleusercontent.com';
-      // Array of API discovery doc URLs for APIs used by the quickstart
-      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
-      // Authorization scopes required by the API; multiple scopes can be
-      // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar";
+    <script>
+      var signIn = document.getElementById('my-signin2');
+      var signOut = document.getElementById('signout-button');
 
-      var authorizeButton = document.getElementById('authorize-button');
-      var signoutButton = document.getElementById('signout-button');
-
-      function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
+      function onSuccess(googleUser) {
         window.profile = googleUser.getBasicProfile();
-        authorizeButton.style.display = 'none';
-        signoutButton.style.display = 'block';
-        // OAuth2 authentication object
-        // Added to window for easy access throughout app
         window.authResponse = googleUser.getAuthResponse();
-        // Access Token for OAuth2
-        var access_token = authResponse.access_token;
-        // The ID token that can be used on your backend:
-        var id_token = authResponse.id_token;
-        window.location.replace("/#!/calendar");
-      };
-      function signOut() {
+        signIn.style.display = 'none';
+        window.location.replace('/#!/calendar');
+        signOut.style.display = 'block';
+      }
+      function onFailure(error) {
+        console.log(error);
+      }
+      function renderButton() {
+        gapi.signin2.render('my-signin2', {
+          'scope': 'profile email https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar',
+          'width': 240,
+          'height': 50,
+          'longtitle': true,
+          'theme': 'dark',
+          'onsuccess': onSuccess,
+          'onfailure': onFailure
+        });
+      }
+      function logOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
-          console.log('User signed out.');
+          signOut.style.display = 'none';
+          window.location.replace('/');
+          signIn.style.display = 'block';
         });
-        signoutButton.style.display = 'none';
-        authorizeButton.style.display = 'block';
-        window.location.replace("/");
       }
-      authorizeButton.style.display = 'block';
     </script>
+
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 
   </body>
 </html>
