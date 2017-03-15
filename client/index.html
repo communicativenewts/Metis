@@ -32,7 +32,7 @@
             <ul class="right chevron">
 
               <!-- Google Sign-Out Button -->
-              <li><div><a href='#' class="submit-form button background-primary border-radius text-white" id="signout-button" style="display: none;" onclick="signOut();">Sign Out</a></div></li>
+              <li><div><a href='#' class="submit-form button background-primary border-radius text-white" id="signout-button" style="display: none;" onclick="logOut();">Sign Out</a></div></li>
 
             </ul>
           </div>
@@ -95,9 +95,7 @@
 
       function onSuccess(googleUser) {
         window.profile = googleUser.getBasicProfile();
-        console.log('Profile:', window.profile);
         window.authResponse = googleUser.getAuthResponse();
-        console.log('Auth Response:', window.authResponse);
         signIn.style.display = 'none';
         window.location.replace('/#!/calendar');
         signOut.style.display = 'block';
@@ -116,13 +114,12 @@
           'onfailure': onFailure
         });
       }
-      function signOut() {
+      function logOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
-          singOut.style.display = 'none';
+          signOut.style.display = 'none';
           window.location.replace('/');
           signIn.style.display = 'block';
-          console.log('User signed out.');
         });
       }
     </script>
