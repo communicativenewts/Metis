@@ -55,9 +55,6 @@ angular.module('app.services', [])
     })
     .then(function(res) {
       return res;
-    })
-    .then(function() {
-      $location.path('/calendar');
     });
   };
 
