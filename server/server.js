@@ -7,7 +7,8 @@ var app = express();
 app.use(express.static('client'));
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://greenfield:greenfield@ds145039.mlab.com:45039/metis_database');
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/';
+mongoose.connect(mongoURI);
 
 var db = mongoose.connection;
 db.on('error', console.error);
