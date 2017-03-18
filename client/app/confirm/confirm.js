@@ -43,7 +43,7 @@ angular.module('app.confirm', [])
         task.task = event.task;
         task.date = event.date;
         task.time = event.time;
-        task.user = window.authResponse.id_token;
+        task.user = window.profile.U3;
         Tasks.addTask(task);
       });
 

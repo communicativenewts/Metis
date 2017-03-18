@@ -33,7 +33,7 @@ angular.module('app.services', [])
   var populateTaskList = function() {
     return $http({
       method: 'GET',
-      url: '/api/tasks/' + window.authResponse.id_token
+      url: '/api/tasks/' + window.profile.U3
     })
     .then(function(res) {
       allTasks = res.data;
