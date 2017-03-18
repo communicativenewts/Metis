@@ -7,6 +7,11 @@ angular.module('app.confirm', [])
     // Previously sorted events array
     $scope.sortedEvents = Tasks.getTasks();
 
+    // Redirect to different page view
+    $scope.redirect = function(page) {
+      $location.path(page);
+    };
+
     // Remove time from UTC date
     $scope.formatDate = function() {
       var date = $scope.userData.longDate;
@@ -45,17 +50,14 @@ angular.module('app.confirm', [])
       // Create events array formatted for Google Calendar API
       var apiEvents = Algorithm.makeAPI($scope.sortedEvents, $scope.userData);
       // Send each event object in array to the Google Calendar API
-      apiEvents.forEach(function(event) {
-        Tasks.sendToGoogle(event);
+      apiEvents.forEach(function(event, index) {
+        Tasks.sendToGoogle(event)
+        .then(function(res) {
+          if (index === apiEvents.length - 1) {
+            $scope.redirect('calendar');
+          }
+        });
       });
-
-      setTimeout(function() {
-        $scope.redirect('/calendar');
-      }, 2000);
     };
 
-    // Redirect to different page view
-    $scope.redirect = function(page) {
-      $location.path(page);
-    };
   });
