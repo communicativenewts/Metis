@@ -33,11 +33,22 @@ angular.module('app.services', [])
   var populateTaskList = function() {
     return $http({
       method: 'GET',
-      url: '/api/tasks/' + window.authResponse.id_token;
+      url: '/api/tasks/' + window.authResponse.id_token
     })
     .then(function(res) {
       allTasks = res.data;
       return allTasks;
+    });
+  };
+
+  var removeTask = function(id) {
+    // Remove task from database
+    return $http({
+      method: 'DELETE',
+      url: '/api/tasks/' + id
+    })
+    .then(function(res) {
+      return res.data;
     });
   };
 
@@ -71,6 +82,7 @@ angular.module('app.services', [])
     getTasks: getTasks,
     setTasks: setTasks,
     populateTaskList: populateTaskList,
+    removeTask: removeTask,
     sendTaskList: sendTaskList,
     sendToGoogle: sendToGoogle
   };
