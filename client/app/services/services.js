@@ -48,7 +48,6 @@ angular.module('app.services', [])
       url: '/api/tasks/' + id
     })
     .then(function(res) {
-      console.log(res.data);
       return;
     });
   };

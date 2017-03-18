@@ -96,8 +96,6 @@
       function onSuccess(googleUser) {
         window.profile = googleUser.getBasicProfile();
         window.authResponse = googleUser.getAuthResponse();
-        console.log('Profile:', window.profile);
-        console.log('Auth Response:', window.authResponse);
         signIn.style.display = 'none';
         window.location.replace('/#!/calendar');
         signOut.style.display = 'block';
