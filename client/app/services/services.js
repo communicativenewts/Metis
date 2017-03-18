@@ -48,6 +48,18 @@ angular.module('app.services', [])
       url: '/api/tasks/' + id
     })
     .then(function(res) {
+      console.log(res.data);
+      return;
+    });
+  };
+
+  var addTask = function(task) {
+    return $http({
+      method: 'POST',
+      url: '/api/tasks',
+      data: task
+    })
+    .then(function(res) {
       return res.data;
     });
   };
@@ -83,6 +95,7 @@ angular.module('app.services', [])
     setTasks: setTasks,
     populateTaskList: populateTaskList,
     removeTask: removeTask,
+    addTask: addTask,
     sendTaskList: sendTaskList,
     sendToGoogle: sendToGoogle
   };

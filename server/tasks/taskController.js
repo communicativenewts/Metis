@@ -16,7 +16,7 @@ module.exports = {
 
   // add task for logged in user
   addTask: function(req, res) {
-    var task = req.body.task;
+    var task = req.body;
     console.log('Task:', task);
     task = new Task(task);
     task.save(function(err, bracket) {

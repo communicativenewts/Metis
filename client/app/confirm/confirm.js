@@ -30,13 +30,25 @@ angular.module('app.confirm', [])
         event.date = $scope.formatDate();
       });
       // Send events array to internal storage array in services.js
-      Tasks.sendTaskList($scope.events);
+      // Tasks.sendTaskList($scope.events);
+
+      // Send events array to database
+      $scope.events.forEach(function(event) {
+        var task = {};
+        task.task = event.task;
+        task.date = event.date;
+        task.time = event.time;
+        task.user = window.authResponse.id_token;
+        Tasks.addTask(task);
+      });
+
       // Create events array formatted for Google Calendar API
       var apiEvents = Algorithm.makeAPI($scope.sortedEvents, $scope.userData);
       // Send each event object in array to the Google Calendar API
       apiEvents.forEach(function(event) {
         Tasks.sendToGoogle(event);
       });
+
       $scope.redirect('/calendar');
     };
 
