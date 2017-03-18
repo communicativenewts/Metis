@@ -49,7 +49,9 @@ angular.module('app.confirm', [])
         Tasks.sendToGoogle(event);
       });
 
-      $scope.redirect('/calendar');
+      setTimeout(function() {
+        $scope.redirect('/calendar');
+      }, 2000);
     };
 
     // Redirect to different page view
