@@ -24,8 +24,8 @@ module.exports = {
     });
   },
 
+  // remove task for logged in user
   removeTask: function(req, res) {
-    // remove task for logged in user
     var id = req.params.id;
     Task.remove({_id: id}, function(err) {
       if (err) {

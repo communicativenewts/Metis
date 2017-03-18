@@ -31,7 +31,14 @@ angular.module('app.services', [])
 
   // Grab tasks from allTasks
   var populateTaskList = function() {
-    return allTasks;
+    return $http({
+      method: 'GET',
+      url: '/api/tasks/' + window.authResponse.id_token;
+    })
+    .then(function(res) {
+      allTasks = res.data;
+      return allTasks;
+    });
   };
 
   // Add tasks to allTasks
