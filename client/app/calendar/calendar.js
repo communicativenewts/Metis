@@ -44,8 +44,11 @@ angular.module('app.calendar', ['ngSanitize'])
 
     // Get tasks saved in database
     $scope.populateTaskList = function() {
-      $scope.tasks = Tasks.populateTaskList();
-      console.log('Tasks:', $scope.tasks);
+      Tasks.populateTaskList()
+      .then(function(tasks) {
+        $scope.tasks = tasks;
+        console.log('Tasks:', $scope.tasks);
+      });
     };
 
     // Populate task list when app loads

@@ -16,6 +16,8 @@ db.once('open', function() {
   console.log('mongoDB connection is open');
 });
 
+require('./config/routes.js')(app, express);
+
 var port = process.env.PORT || 8888;
 
 app.listen(port, function() {
