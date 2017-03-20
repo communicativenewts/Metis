@@ -34,9 +34,21 @@ angular.module('app.calendar', ['ngSanitize'])
       $location.path(page);
     };
 
+    // Remove specific task from tasks array and database
+    $scope.removeTask = function(id, index) {
+      // remove from $scope.tasks array
+      var newTasks = [].concat($scope.tasks.splice(0, index))
+      $scope.tasks = newTasks.concat($scope.tasks.splice(index + 1));
+      // delete from database (new service method)
+      Tasks.removeTask(id);
+    };
+
     // Get tasks saved in database
     $scope.populateTaskList = function() {
-      $scope.tasks = Tasks.populateTaskList();
+      Tasks.populateTaskList()
+      .then(function(tasks) {
+        $scope.tasks = tasks;
+      });
     };
 
     // Populate task list when app loads

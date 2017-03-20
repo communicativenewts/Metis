@@ -31,7 +31,36 @@ angular.module('app.services', [])
 
   // Grab tasks from allTasks
   var populateTaskList = function() {
-    return allTasks;
+    return $http({
+      method: 'GET',
+      url: '/api/tasks/' + window.profile.U3
+    })
+    .then(function(res) {
+      allTasks = res.data;
+      return allTasks;
+    });
+  };
+
+  var removeTask = function(id) {
+    // Remove task from database
+    return $http({
+      method: 'DELETE',
+      url: '/api/tasks/' + id
+    })
+    .then(function(res) {
+      return;
+    });
+  };
+
+  var addTask = function(task) {
+    return $http({
+      method: 'POST',
+      url: '/api/tasks',
+      data: task
+    })
+    .then(function(res) {
+      return res.data;
+    });
   };
 
   // Add tasks to allTasks
@@ -64,6 +93,8 @@ angular.module('app.services', [])
     getTasks: getTasks,
     setTasks: setTasks,
     populateTaskList: populateTaskList,
+    removeTask: removeTask,
+    addTask: addTask,
     sendTaskList: sendTaskList,
     sendToGoogle: sendToGoogle
   };
